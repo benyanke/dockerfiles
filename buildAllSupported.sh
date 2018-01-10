@@ -7,6 +7,9 @@ for script in */build.sh ; do
 
   echo "Running $script" ;
 
-  "$script";
+  (
+    cd `/usr/bin/dirname $script`
+    /bin/bash `/usr/bin/basename $script`
+  )
 
 done
