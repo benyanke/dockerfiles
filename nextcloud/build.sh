@@ -1,4 +1,4 @@
-\#!/bin/bash
+#!/bin/bash
 
 # (
   docker build --force-rm -f Dockerfile.11.0 -t benyanke/nextcloud:11.0 .;
