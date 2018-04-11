@@ -8,8 +8,14 @@ RUN apk add --update git \
     && cp /tmp/glauth/bin/glauth64 /app/glauth64 \
     && mkdir /app/config \
     && cp /tmp/glauth/sample-simple.cfg /app/config/config.cfg \
+    && cp /tmp/glauth/sample-simple.cfg /tmp/config.backup.cfg \
     && rm -Rf /tmp/glauth
 
-EXPOSE 389
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+EXPOSE 389 5555
+
 VOLUME [ "/app/config" ]
-CMD [ "/app/glauth64", "-c", "/app/config/config.cfg" ]
+CMD [ "/bin/sh", "/app/start.sh" ]
+
