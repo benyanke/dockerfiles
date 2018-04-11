@@ -3,11 +3,13 @@ MAINTAINER Ben Yanke <ben@benyanke.com>
 
 RUN apk add --update git \
     && mkdir /data /app \
-    && cd /app \
-    && git clone https://github.com/nmcclain/glauth \
-    && cp /app/glauth/bin/glauth64 /app/glauth64 \
-    && rm -Rf glauth/
+    && cd /tmp \
+    && git clone https://github.com/nmcclain/glauth /tmp/glauth \
+    && cp /tmp/glauth/bin/glauth64 /app/glauth64 \
+    && mkdir /app/config \
+    && cp /tmp/glauth/sample-simple.cfg /app/config/config.cfg \
+    && rm -Rf /tmp/glauth
 
 EXPOSE 389
-VOLUME [ "/data" ]
-CMD [ "/app/glauth64", "-c", "/data/glauth.cfg" ]
+VOLUME [ "/app/config" ]
+CMD [ "/app/glauth64", "-c", "/app/config/config.cfg" ]
